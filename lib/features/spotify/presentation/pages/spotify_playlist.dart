@@ -7,22 +7,43 @@ class SpotifyPlaylist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: AppColors.containerColor,
-        child: Row(
-          children: [
-            // mapResponse == null
-            //? const Text("Loading...")
-            //: Image.network(mapResponse!['icons'].toString()),
-            Image.network(
-                "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78"),
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            height: 187,
+            margin: const EdgeInsets.only(top: 24),
+            width: 163,
+            decoration: const BoxDecoration(
+              color: AppColors.containerColor,
+              borderRadius: BorderRadius.all(
+                Radius.circular(12.0),
+              ),
+            ),
+            child: Row(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Image.network(
+                      "https://i.scdn.co/image/ab67706f000000039a25748cbbef9efb2c8b8339"),
+                )
 
-            //Text(listResponsePlaylis![1]['href'].toString()),
+                //Text(listResponsePlaylis![1]['href'].toString()),
 
-            //: Image.network(listResponse![0]['url'].toString(),
-            // width: 160, height: 150),
-            //const Text("Peppeh"),
-          ],
-        ));
+                //: Image.network(listResponse![0]['url'].toString(),
+                // width: 160, height: 150),
+                //const Text("Peppeh"),
+              ],
+            ),
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (context, index) => ListTile(
+                    title: Text("playlist ${index + 1}"),
+                  ))
+        ],
+      ),
+    );
   }
 }

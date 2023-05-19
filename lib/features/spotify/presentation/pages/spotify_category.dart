@@ -42,6 +42,9 @@ class SpotifyCategory extends StatefulWidget {
 }
 
 class _SpotifyCategoryPageState extends State<SpotifyCategory> {
+  String apiToken =
+      "BQBAOEzFFzokX2rHDwdS1sv_YspRsNqLAOpMKNG5BbwZaJbgS59_M7wpY0JT5xcXvjAneycRmFxyV3c8l31Mq4B14DOKvjL4buroe9QwqaPbtF7Bq-_3";
+
   //get category
   Future apicall() async {
     http.Response response;
@@ -49,8 +52,7 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
         Uri.parse("https://api.spotify.com/v1/browse/categories/afro"),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization':
-              'Bearer BQDx17BTcBrLanLUuQWxiNwqKebWuv_JIKFo_wOEMM1BTNKw183w8PyPa0NS6e8hVeqDoWz93YLEDrAsEA1Y_7Ca_iafdIvxcvDIZ6kzoSVQGIxIuQiL',
+          'Authorization': 'Bearer $apiToken',
         });
 
 //return bad request when getting status code 401 upon request
@@ -78,8 +80,7 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
             "https://api.spotify.com/v1/browse/categories/afro/playlists"),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization':
-              'Bearer BQDx17BTcBrLanLUuQWxiNwqKebWuv_JIKFo_wOEMM1BTNKw183w8PyPa0NS6e8hVeqDoWz93YLEDrAsEA1Y_7Ca_iafdIvxcvDIZ6kzoSVQGIxIuQiL',
+          'Authorization': 'Bearer $apiToken',
         });
 
 //return bad request when getting status code 401 upon request
@@ -205,42 +206,56 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
             ),
           ),
 
-          Container(
-            height: 187,
-            margin: const EdgeInsets.only(top: 24),
-            width: 163,
-            decoration: const BoxDecoration(
-              color: AppColors.containerColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(12.0),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                mapResponse == null
-                    ? const Text("Loading...")
-                    //: Image.network(mapResponse!['icons'].toString()),
-                    : GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.playlist,
-                          );
-                        },
-                        child: Image.network(
-                            "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78"),
+          Expanded(
+            flex: 2,
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 187,
+                    margin: const EdgeInsets.only(top: 24),
+                    width: 163,
+                    decoration: const BoxDecoration(
+                      color: AppColors.containerColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.0),
                       ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          mapResponse == null
+                              ? const Text("Loading...")
+                              //: Image.network(mapResponse!['icons'].toString()),
+                              : GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.playlist,
+                                    );
+                                  },
+                                  child: Image.network(
+                                      "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78"),
+                                ),
 
-                //Text(listResponsePlaylis![1]['href'].toString()),
+                          //Text(listResponsePlaylis![1]['href'].toString()),
 
-                //: Image.network(listResponse![0]['url'].toString(),
-                // width: 160, height: 150),
-                const Text("Peppeh"),
-              ],
-            ),
-          ),
+                          //: Image.network(listResponse![0]['url'].toString(),
+                          // width: 160, height: 150),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Peppeh"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          )
 
           /////
           /*Expanded(
