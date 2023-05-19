@@ -43,7 +43,7 @@ class SpotifyCategory extends StatefulWidget {
 
 class _SpotifyCategoryPageState extends State<SpotifyCategory> {
   String apiToken =
-      "BQBAOEzFFzokX2rHDwdS1sv_YspRsNqLAOpMKNG5BbwZaJbgS59_M7wpY0JT5xcXvjAneycRmFxyV3c8l31Mq4B14DOKvjL4buroe9QwqaPbtF7Bq-_3";
+      "BQCdNZajtKY0nH1605qDFNVmf3xSXu1AZoRGUklwWLrOrYAcVrTBU_49S1B2K4VGIuu49Y3s5O1UzOlLHN-hGw_tOwaBzs7WnZBX6nf9wU5vC6wwtv9H";
 
   //get category
   Future apicall() async {
@@ -130,31 +130,30 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Afro"),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => Navigator.of(context).pushNamed(AppRoutes.about),
-          ),
-        ],
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[
-                AppColors.blue,
-                AppColors.cyan,
-                AppColors.green,
-              ],
+        appBar: AppBar(
+          title: const Text("Afro"),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.about),
+            ),
+          ],
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  AppColors.blue,
+                  AppColors.cyan,
+                  AppColors.green,
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: Column(
-        children: [
+        body: Column(children: [
           Container(
             margin: const EdgeInsets.only(left: 24, top: 24),
             height: 72,
@@ -205,60 +204,70 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
               ],
             ),
           ),
-
           Expanded(
-            flex: 2,
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 187,
-                    margin: const EdgeInsets.only(top: 24),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
                     width: 163,
-                    decoration: const BoxDecoration(
-                      color: AppColors.containerColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          mapResponse == null
-                              ? const Text("Loading...")
-                              //: Image.network(mapResponse!['icons'].toString()),
-                              : GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      AppRoutes.playlist,
-                                    );
-                                  },
-                                  child: Image.network(
-                                      "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78"),
-                                ),
+                    margin: const EdgeInsets.only(left: 24, top: 24),
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 187,
+                            margin: const EdgeInsets.only(top: 24),
+                            width: 163,
+                            decoration: const BoxDecoration(
+                              color: AppColors.containerColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Wrap(
+                                //crossAxisAlignment: CrossAxisAlignment.center,
+                                //mainAxisAlignment:
+                                // MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  mapResponse == null
+                                      ? const Text("Loading...")
+                                      //: Image.network(mapResponse!['icons'].toString()),
+                                      : GestureDetector(
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                              context,
+                                              AppRoutes.playlist,
+                                            );
+                                          },
+                                          child: Image.network(
+                                              "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78",
+                                              width: 155,
+                                              height: 155),
+                                        ),
 
-                          //Text(listResponsePlaylis![1]['href'].toString()),
+                                  //Text(listResponsePlaylis![1]['href'].toString()),
 
-                          //: Image.network(listResponse![0]['url'].toString(),
-                          // width: 160, height: 150),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Peppeh"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-          )
+                                  //: Image.network(listResponse![0]['url'].toString(),
+                                  // width: 160, height: 150),
+                                  const Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text("Peppeh"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        })),
+              ),
+            ]),
+          ),
+        ])
 
-          /////
-          /*Expanded(
+        /////
+        /*Expanded(
               child: ListView.builder(
             itemBuilder: (context, index) {
               return Container(
@@ -274,8 +283,7 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
             itemCount:
                 listResponsePlaylis == null ? 0 : listResponsePlaylis!.length,
           ))**/
-        ],
-      ),
-    );
+
+        );
   }
 }
