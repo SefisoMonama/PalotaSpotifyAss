@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 @override
 Widget build(BuildContext context) {
-  return MaterialApp(
+  return const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: SpotifyCategory(
       categoryId: '',
@@ -43,7 +43,7 @@ class SpotifyCategory extends StatefulWidget {
 
 class _SpotifyCategoryPageState extends State<SpotifyCategory> {
   String apiToken =
-      "BQCdNZajtKY0nH1605qDFNVmf3xSXu1AZoRGUklwWLrOrYAcVrTBU_49S1B2K4VGIuu49Y3s5O1UzOlLHN-hGw_tOwaBzs7WnZBX6nf9wU5vC6wwtv9H";
+      "BQBF5GX_Ide7gDxo_vhAuZPRYRT70uz2o74cX6OpR81OLmho72YJRmdu6nqH0rFd7rqxeZ04uOn7SZS-pwDvL0KWq158fN6nkkfY16C6d9P6hSRNw78";
 
   //get category
   Future apicall() async {
@@ -173,14 +173,17 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
               //child: Text(token),
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: listResponse == null
-                      ? const Text("Loading...")
-                      //: Image.network(mapResponse!['icons'].toString()),
-                      //: Image.network("https://t.scdn.co/images/b505b01bbe0e490cbe43b07f16212892.jpeg"),
-                      : Image.network(listResponse![0]['url'].toString(),
-                          width: 64, height: 64),
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: listResponse == null
+                          ? const Text("Loading...")
+                          //: Image.network(mapResponse!['icons'].toString()),
+                          //: Image.network("https://t.scdn.co/images/b505b01bbe0e490cbe43b07f16212892.jpeg"),
+                          : Image.network(listResponse![0]['url'].toString(),
+                              width: 64, height: 64),
+                    )),
+
                 //Text(listResponse![0]['name'].toString())
                 const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -205,6 +208,7 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
             ),
           ),
           Expanded(
+            flex: 2,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -242,10 +246,14 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
                                               AppRoutes.playlist,
                                             );
                                           },
-                                          child: Image.network(
-                                              "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78",
-                                              width: 155,
-                                              height: 155),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                                "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78",
+                                                width: 155,
+                                                height: 155),
+                                          ),
                                         ),
 
                                   //Text(listResponsePlaylis![1]['href'].toString()),
