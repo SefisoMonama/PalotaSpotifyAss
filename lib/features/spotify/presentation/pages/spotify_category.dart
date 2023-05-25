@@ -43,7 +43,7 @@ class SpotifyCategory extends StatefulWidget {
 
 class _SpotifyCategoryPageState extends State<SpotifyCategory> {
   String apiToken =
-      "BQBF5GX_Ide7gDxo_vhAuZPRYRT70uz2o74cX6OpR81OLmho72YJRmdu6nqH0rFd7rqxeZ04uOn7SZS-pwDvL0KWq158fN6nkkfY16C6d9P6hSRNw78";
+      "BQBEw0DE3sComRIzQehBLz0uQoeWLOCFYPmsvL5k3eBthcOvZIvm1AKfTCOXf2YtumyGNp7mH03q5Upl1_Pn7YrcuowhKYa-hgqLmMxZmlMsS7tBkVE";
 
   //get category
   Future apicall() async {
@@ -178,8 +178,6 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
                       borderRadius: BorderRadius.circular(8.0),
                       child: listResponse == null
                           ? const Text("Loading...")
-                          //: Image.network(mapResponse!['icons'].toString()),
-                          //: Image.network("https://t.scdn.co/images/b505b01bbe0e490cbe43b07f16212892.jpeg"),
                           : Image.network(listResponse![0]['url'].toString(),
                               width: 64, height: 64),
                     )),

@@ -124,11 +124,32 @@ class SpotifyPlaylist extends StatelessWidget {
 
           ///////////////
           ListView.builder(
-              shrinkWrap: true,
-              itemCount: 8,
-              itemBuilder: (context, index) => ListTile(
-                    title: Text("playlist ${index + 1}"),
-                  )),
+            shrinkWrap: true,
+            itemCount: 8,
+            itemBuilder: (context, index) => const ListTile(
+              title: Text(
+                "Ayra Star",
+                style: TextStyle(
+                  fontFamily: 'RobotoMono',
+                  fontSize: 12,
+                  color: AppColors.whiteS,
+                ),
+              ),
+              subtitle: Text(
+                "Rush",
+                style: TextStyle(
+                  fontFamily: 'RobotoMono',
+                  fontSize: 11,
+                  color: AppColors.whiteS,
+                ),
+              ),
+              leading: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                "https://i.scdn.co/image/ab6761610000f178eb241673a5bd438b51ba124e",
+              )),
+              trailing: Text("3:22"),
+            ),
+          ),
 
           ////////////
           Container(
@@ -149,7 +170,7 @@ class SpotifyPlaylist extends StatelessWidget {
                 ),
               ),
               child: const Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.centerLeft,
                 child: Text(
                   "Featured Artists",
                   textAlign: TextAlign.right,
