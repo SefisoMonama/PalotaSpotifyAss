@@ -6,6 +6,7 @@ import 'package:flutter_spotify_africa_assessment/colors.dart';
 import 'package:flutter_spotify_africa_assessment/features/spotify/presentation/pages/spotify_playlist.dart';
 import 'package:flutter_spotify_africa_assessment/routes.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 // TODO: fetch and populate playlist info and allow for click-through to detail
 // Feel free to change this to a stateful widget if necessary
@@ -43,8 +44,7 @@ class SpotifyCategory extends StatefulWidget {
 
 class _SpotifyCategoryPageState extends State<SpotifyCategory> {
   String apiToken =
-      "BQBEw0DE3sComRIzQehBLz0uQoeWLOCFYPmsvL5k3eBthcOvZIvm1AKfTCOXf2YtumyGNp7mH03q5Upl1_Pn7YrcuowhKYa-hgqLmMxZmlMsS7tBkVE";
-
+      "BQDXgPdhHMmm_3oR-crN_CAGgxfuJxtOhIre8db0l2WZmOuLSR3l_SFIkdI5m3xxgdqceTTGubjoCZC7vCj9-EjEq9icyZhVUqqYpiRmLRbJFqv6TLA";
   //get category
   Future apicall() async {
     http.Response response;
@@ -153,7 +153,8 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
             ),
           ),
         ),
-        body: Column(children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           Container(
             margin: const EdgeInsets.only(left: 24, top: 24),
             height: 72,
@@ -205,22 +206,24 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
               ],
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    width: 163,
-                    margin: const EdgeInsets.only(left: 24, top: 24),
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 187,
-                            margin: const EdgeInsets.only(top: 24),
-                            width: 163,
+
+          //gridView
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: MasonryGridView.builder(
+                      shrinkWrap: true,
+                      itemCount: 6,
+                      gridDelegate:
+                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
                             decoration: const BoxDecoration(
                               color: AppColors.containerColor,
                               borderRadius: BorderRadius.all(
@@ -248,9 +251,7 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.network(
-                                                "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78",
-                                                width: 155,
-                                                height: 155),
+                                                "https://i.scdn.co/image/ab67706f00000003740df3771d19c09eebf4ed78"),
                                           ),
                                         ),
 
@@ -258,19 +259,24 @@ class _SpotifyCategoryPageState extends State<SpotifyCategory> {
 
                                   //: Image.network(listResponse![0]['url'].toString(),
                                   // width: 160, height: 150),
-                                  const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Peppeh"),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("Peppeh"),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          );
-                        })),
-              ),
-            ]),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
           ),
-        ])
+        ]))
 
         /////
         /*Expanded(
